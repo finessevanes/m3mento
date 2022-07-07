@@ -1,4 +1,5 @@
-import { useState } from 'react'
+
+import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -12,16 +13,26 @@ interface HomeProps {
   currentAccount: string;
 };
 
-const Home: NextPage = () => {
 
+const Home: NextPage = () => {
   const [currentAccount, setCurrentAccount] = useState<string>('');
 
-      const inc = (e: any) => {
-      console.log("btn", e.target)
-      setCurrentAccount('0x7EEa9F4A69##########66Efc0798523910b146D');
-    };
-  //  const CounterDisplay: React.FunctionComponent<CounterDisplayProps> = ({count})
-  // const [currentAccount: string, setCurrentAccount: string] = useState()
+  useEffect(()=>{
+    checkIfWalletIsConnected()
+  }, [])
+
+  async function checkIfWalletIsConnected(){
+    console.log('hellllo')
+  }
+
+  async function connectWallet() {
+    console.log('35hello')
+    try {
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -37,7 +48,7 @@ const Home: NextPage = () => {
             <h1>testy</h1>
           ) : (
             <>
-              <button className={ButtonStyle} onClick={inc}>
+              <button className={ButtonStyle} onClick={connectWallet}>
                 Connect Wallet
               </button>
             </>
