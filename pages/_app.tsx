@@ -3,6 +3,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app'
 
 import {
+  darkTheme,
   getDefaultWallets,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
@@ -18,7 +19,9 @@ import { publicProvider } from 'wagmi/providers/public';
 
 
 const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+  [
+    chain.rinkeby
+  ],
   [
     alchemyProvider({ alchemyId: process.env.ALCHEMY_KEY_RINKEBY }),
     publicProvider()
@@ -40,7 +43,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} theme={darkTheme({
+        accentColor: '#8F2A4B',
+        borderRadius: 'small',
+
+      })}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
