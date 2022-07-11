@@ -12,7 +12,7 @@ import {
   chain,
   configureChains,
   createClient,
-  WagmiConfig,
+  WagmiConfig
 } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
@@ -40,18 +40,15 @@ const wagmiClient = createClient({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme({
         accentColor: '#8F2A4B',
-        borderRadius: 'small',
-
+        borderRadius: 'small'
       })}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
-
   )
 }
 

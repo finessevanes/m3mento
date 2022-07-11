@@ -1,45 +1,25 @@
-
-import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
-import Navbar from '../components/Navbar'
-import BuyTicket from '../components/BuyTicket'
 
+import { useAccount } from 'wagmi'
+import Layout from '../src/components/Layout'
+import EventsCarousel from '../src/components/EventsCarousel'
 
-const ButtonStyle = `
-bg-gradient-200 hover:bg-gradient-250 text-white py-2 px-4 rounded shadow
-`
-
-const Home: NextPage = () => {
-  const [currentAccount, setCurrentAccount] = useState<string>('');
-
-  useEffect(() => {
-    checkIfWalletIsConnected()
-  }, [])
-
-  async function checkIfWalletIsConnected() {
-    console.log('checkIfWalletIsConnected')
-  }
-
-  async function connectWallet() {
-    console.log('35hello')
-    try {
-    } catch (e) {
-      console.log(e)
-    }
-  }
+const Home = () => {
+  const { address } = useAccount()
 
   return (
-    <>
-      <Head>
-        <title>m3mento</title>
-        <meta name="description" content="An NFT ticketing app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Navbar />
-      <BuyTicket />
-    </>
+    <Layout>
+      <div className="bg-hero-cover bg-cover">
+        <div className="object-fill h-screen w-full flex justify-center items-end">
+          <h1 className='absolute text-white mb-24'>Miss collecting your favorite tickets? We did too.</h1>
+        </div>
+      </div>
+      <EventsCarousel title='Festivals' bgColor='bg-white' />
+      <EventsCarousel title='Music Venues' bgColor='bg-black text-white'/>
+      <EventsCarousel title='web3 Events' bgColor='bg-white'/>
+    </Layout>
   )
 }
 
