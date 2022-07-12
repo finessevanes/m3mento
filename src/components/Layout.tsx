@@ -8,8 +8,10 @@ type Props = {
   title?: string
 }
 
+const styles = `flex flex-col`
+
 const Layout = ({ children, title = 'm3mento' }: Props) => (
-  <div className=''>
+  <>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -17,7 +19,7 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
     </Head>
     <Navbar/>
     {children}
-  </div>
+  </>
 )
 
 export default Layout
