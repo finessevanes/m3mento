@@ -1,8 +1,5 @@
-type Props = {
-  stringToDisplay: string
-}
 
-export const TicketSVG = ({ stringToDisplay }: Props) => {
+export const TicketSVG = ({ stringToDisplay }) => {
   return (
     <div className='mt-5 self-center'>
       <svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'>
