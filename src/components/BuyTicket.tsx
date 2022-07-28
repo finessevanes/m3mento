@@ -14,7 +14,7 @@ shadow
 self-center
 w-1/5
 `
-const CONTRACT_ADDRESS = '0xd7573740BeFa52E4903B28dB0A7c12d810dc6e4C'
+const CONTRACT_ADDRESS = '0x48ec8e99054527074d426a6d590e6c784e21757D'
 
 export default function BuyTicket() {
     const [stringToDisplay, setStringToDisplay] = useState<string>('')

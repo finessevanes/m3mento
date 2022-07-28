@@ -15,7 +15,8 @@ const Home = () => {
   return (
     <div className=''>
       <div className="bg-hero-cover bg-cover">
-        <div className='flex justify-end top-0 sticky z-40'>
+        <div className='flex justify-space-between top-0 sticky z-40'>
+        <button className='bg-red-200'>Admin</button>
           <div className='mt-3 mr-3'><ConnectButton /></div>
         </div>
         <div className="object-fill h-screen z-20 w-full flex justify-center items-end">
