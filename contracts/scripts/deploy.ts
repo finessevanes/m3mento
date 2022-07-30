@@ -1,3 +1,5 @@
+import hre from "hardhat";
+
 const main = async () => {
   const nftContractFactory = await hre.ethers.getContractFactory('NWS01NFT');
   const nftContract = await nftContractFactory.deploy();
