@@ -1,4 +1,4 @@
-import hre from "hardhat";
+const hre = require("hardhat")
 
 const main = async () => {
   const nftContractFactory = await hre.ethers.getContractFactory('NWS01NFT');
@@ -18,3 +18,5 @@ const runMain = async () => {
 };
 
 runMain();
+
+export {}
