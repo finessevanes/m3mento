@@ -36,7 +36,7 @@ function Web3Events() {
 
     useEffect(() => {
         getCurrentId()
-    }, [])
+    })
 
     async function getCurrentId() {
         try {

@@ -4,11 +4,12 @@ const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
 import contractInterface from '../src/utils/abi.json'
 
 function Admin() {
-    const [isSaleOpen, setIsSaleOpen] = useState<boolean>(false)
+    const [isSaleActive, setIsSaleActive] = useState<boolean>(true)
     const [scannedAddress, setScannedAddress] = useState<string>('')
+    const [isOwner, setIsOwner] = useState<boolean>(false)
 
     const ButtonStyle = `
-    bg-gradient-200 hover:bg-gradient-250 text-white py-2 px-4 rounded shadow
+    bg-gradient-200 hover:bg-gradient-250 text-white py-2 px-4 rounded shadow mt-2 disabled:bg-gradient-100
     `
 
     const provider = useProvider()
@@ -16,35 +17,38 @@ function Admin() {
     const { address } = useAccount()
 
     const contractProvider = useContract({
-      addressOrName: CONTRACT_ADDRESS,
-      contractInterface: contractInterface.abi,
-      signerOrProvider: provider,
+        addressOrName: CONTRACT_ADDRESS,
+        contractInterface: contractInterface.abi,
+        signerOrProvider: provider,
     })
 
     const contractSigner = useContract({
         addressOrName: CONTRACT_ADDRESS,
         contractInterface: contractInterface.abi,
         signerOrProvider: signer,
-      })
+    })
 
-      const handleScan = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleScan = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e === null) return
         if (e.target.value?.length < 51) return
         const address = e.target.value;
         const formattedAddress = address.slice(9).toLowerCase()
-    
+
         setScannedAddress(formattedAddress)
- 
-      }
+        checkIfHoldsNFT(formattedAddress)
+    }
 
     const openSale = async () => {
         if (!contractSigner) return;
         try {
+            console.log('pre OPEN_SALE sale is currently: ', isSaleActive)
             const openSaleTxn = await contractSigner.openSale()
             console.log('... opening sale')
             await openSaleTxn.wait()
+            setIsSaleActive(true)
             console.log('complete!')
-            console.log('openSaleTxn: ', openSaleTxn)
+            console.log('post OPEN_SALE sale is currently: ', isSaleActive)
+            console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${openSaleTxn.hash}`)
 
         } catch (e) {
             console.log(e)
@@ -54,11 +58,14 @@ function Admin() {
     const closeSale = async () => {
         if (!contractSigner) return;
         try {
+            console.log('pre CLOSE_SALE sale is currently: ', isSaleActive)
             const closeSaleTxn = await contractSigner.closeSale()
             console.log('... closing sale')
             await closeSaleTxn.wait()
+            setIsSaleActive(false)
             console.log('complete!')
-            console.log('closeSaleTxn: ', closeSaleTxn)
+            console.log('post CLOSE_SALE sale is currently: ', isSaleActive)
+            console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${closeSaleTxn.hash}`)
 
         } catch (e) {
             console.log(e)
@@ -66,41 +73,52 @@ function Admin() {
     }
 
     const checkIn = async () => {
-        if (!contractSigner) return;
         try {
-            const checkInTxn = await contractSigner.checkIn(scannedAddress, {gasLimit: 3e7})
+            let checkInTxn = await contractSigner.checkIn(scannedAddress)
+            console.log('address to be checked in: ', scannedAddress)
             console.log('... checking in')
             await checkInTxn.wait()
             console.log('complete!')
-            console.log('checkInTxn', checkInTxn)
-
+            console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${checkInTxn.hash}`)
+ 
         } catch (e) {
             console.log(e)
         }
     }
 
-    useEffect(() => {
-        const checkSale = async () => {
-            if (!contractProvider) return;
+    const checkIfHoldsNFT = async (addy: string) => {
+        try {
+            let isOwnerOfNFT = await contractSigner.confirmOwnership(addy)
+            setIsOwner(isOwnerOfNFT)
 
-            const isSaleOpen = await contractProvider.isSaleOpen()
-            setIsSaleOpen(isSaleOpen)
+        } catch (e) {
+            console.log()
         }
+    }
 
-        checkSale()
-        console.log('is sale open?', isSaleOpen)
-    }, [contractProvider, isSaleOpen])
+    // useEffect(() => {
+    //     async function checkSale() {
+    //         try {
+    //             let isSaleOpen = await contractProvider.isSaleOpen()
+    //             setIsSaleActive(isSaleOpen)
+    //         } catch (e) {
+    //             console.log(e)
+    //         }
+    //     }
 
-    console.log(scannedAddress)
+    //     checkSale()
+    // }, [contractProvider])
+
     return (
         <div className="flex justify-center mt-60">
             <div className="bg-red-100 rounded-lg flex flex-col p-12 text-center">
                 <h1 className="">Admin Panel</h1>
-                { isSaleOpen? <h1>Sale is Active</h1> : <h1>Tickets are not on sale</h1>}
+                {isSaleActive ? <h1>ON SALE</h1> : <h1>... check back later</h1>}
+                <button onClick={openSale} className={ButtonStyle} disabled={isSaleActive}>Open Sale</button>
+                <button onClick={closeSale} className={ButtonStyle} disabled={!isSaleActive}>Close Sale</button>
+                <h2>Scan User</h2>
                 <input onChange={handleScan} />
-                <button onClick={checkIn} className={ButtonStyle}>Check In</button>
-                <button onClick={openSale} className={ButtonStyle}>Open Sale</button>
-                <button onClick={closeSale} className={ButtonStyle}>Close Sale</button>
+                {isOwner && <button onClick={checkIn} className={ButtonStyle} >Check In</button>}
             </div>
         </div>
     )
