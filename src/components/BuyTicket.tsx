@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { TicketSVG } from './TicketSVG'
-import contractInterface from '../../src/utils/mintNFT.json'
+import contractInterface from '../../src/utils/abi.json'
 import { useContract, useProvider, useSigner } from 'wagmi'
 
 const ButtonStyle = `
@@ -14,7 +14,7 @@ shadow
 self-center
 w-1/5
 `
-const CONTRACT_ADDRESS = '0x48ec8e99054527074d426a6d590e6c784e21757D'
+const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
 
 export default function BuyTicket() {
     const [stringToDisplay, setStringToDisplay] = useState<string>('')

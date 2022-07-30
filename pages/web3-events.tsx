@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { TicketSVG } from '../src/components/TicketSVG'
-import contractInterface from '../src/utils/mintNFT.json'
+import contractInterface from '../src/utils/abi.json'
 import { useContract, useProvider, useSigner } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
@@ -16,7 +16,7 @@ self-center
 w-content
 mt-4
 `
-const CONTRACT_ADDRESS = '0x48ec8e99054527074d426a6d590e6c784e21757D'
+const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
 
 function Web3Events() {
     const [stringToDisplay, setStringToDisplay] = useState<string>('')

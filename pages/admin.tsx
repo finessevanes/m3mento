@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useAccount, useProvider, useContract, useSigner } from 'wagmi'
-const CONTRACT_ADDRESS = '0x48ec8e99054527074d426a6d590e6c784e21757D'
-import contractInterface from '../src/utils/mintNFT.json'
+const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
+import contractInterface from '../src/utils/abi.json'
 
 function Admin() {
     const [isSaleOpen, setIsSaleOpen] = useState<boolean>(false)

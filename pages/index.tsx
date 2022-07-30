@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import contractInterface from '../src/utils/mintNFT.json'
+import contractInterface from '../src/utils/abi.json'
 import Link from 'next/link';
 
 import { useAccount, useProvider, useContract } from 'wagmi'
@@ -10,7 +10,7 @@ import Layout from '../src/components/Layout'
 import EventsCarousel from '../src/components/EventsCarousel'
 import Navbar from '../src/components/Navbar'
 
-const CONTRACT_ADDRESS = '0x48ec8e99054527074d426a6d590e6c784e21757D'
+const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
 
 
 const Home = () => {

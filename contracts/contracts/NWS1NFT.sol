@@ -29,10 +29,11 @@ contract NWS01NFT is ERC721URIStorage, Ownable {
     mapping(address => uint256[]) public ticketHolderIds;
     mapping(address => bool) public checkIns;
 
-    constructor() ERC721("Nights and Weekends S01", "NWS01") {
+    constructor() ERC721("Test 01", "T01") {
         _ticketId.increment();
     }
 
+    // any contract can call this function
     function checkIn(address addy) public {
         checkIns[addy] = true;
         uint256 ticketId = ticketHolderIds[addy][0];
@@ -51,6 +52,10 @@ contract NWS01NFT is ERC721URIStorage, Ownable {
             abi.encodePacked("data:application/json;base64,", metaData)
         );
 
+        console.log("in checkIn");
+        console.log("ticketId: ", ticketId);
+        console.log("tokenURI: ", tokenURI);
+
         _setTokenURI(ticketId, tokenURI);
     }
 
@@ -59,7 +64,7 @@ contract NWS01NFT is ERC721URIStorage, Ownable {
         // require(msg.value >= mintPrice, "Pay more money");
         require(saleIsActive, "Tickets are not on sale");
         uint256 currentTicketId = _ticketId.current();
-        string memory stringItemId = Strings.toString(currentTicketId);
+        string memory stringTicketId = Strings.toString(currentTicketId);
 
         if (currentTicketId < 10) {
             zeros = "00";
@@ -70,7 +75,7 @@ contract NWS01NFT is ERC721URIStorage, Ownable {
         }
 
         string memory finalSvg = string(
-            abi.encodePacked(firstSvg, zeros, stringItemId, lastSvg)
+            abi.encodePacked(firstSvg, zeros, stringTicketId, lastSvg)
         );
 
         string memory metaData = Base64.encode(
@@ -85,13 +90,17 @@ contract NWS01NFT is ERC721URIStorage, Ownable {
             )
         );
 
-        string memory finalTokenUri = string(
+        string memory tokenURI = string(
             abi.encodePacked("data:application/json;base64,", metaData)
         );
 
-        _safeMint(msg.sender, currentTicketId);
-        ticketHolderIds[msg.sender].push(currentTicketId);
-        _setTokenURI(currentTicketId, finalTokenUri);
+        _safeMint(msg.sender, _ticketId.current());
+        ticketHolderIds[msg.sender].push(_ticketId.current());
+        _setTokenURI(_ticketId.current(), tokenURI);
+
+        console.log("in mint");
+        console.log("_ticketId.current(): ", _ticketId.current());
+        console.log("tokenURI: ", tokenURI);
 
         _ticketId.increment();
         availableTickets = availableTickets - 1;
@@ -118,10 +127,15 @@ contract NWS01NFT is ERC721URIStorage, Ownable {
     }
 
     function isSaleOpen() public view returns (bool) {
+        console.log("saleIsActive: ", saleIsActive);
         return saleIsActive;
     }
 
     function confirmOwnership(address addy) public view returns (bool) {
+        console.log(
+            "ticketHolderIds[addy].length: ",
+            ticketHolderIds[addy].length
+        );
         return ticketHolderIds[addy].length > 0;
     }
 }
