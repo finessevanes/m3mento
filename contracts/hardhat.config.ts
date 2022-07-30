@@ -1,7 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
 
-console.log('#### process.env.ALCHEMY_KEY_RINKEBY: ', process.env.ALCHEMY_KEY_RINKEBY)
-
 module.exports = {
   solidity: "0.8.1",
   networks: {

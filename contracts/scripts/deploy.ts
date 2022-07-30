@@ -1,5 +1,3 @@
-console.log('twett')
-
 const main = async () => {
   const nftContractFactory = await hre.ethers.getContractFactory('NWS01NFT');
   const nftContract = await nftContractFactory.deploy();
