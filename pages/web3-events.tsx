@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { TicketSVG } from '../src/components/TicketSVG'
 import contractInterface from '../src/utils/abi.json'
-import { useContract, useProvider, useSigner } from 'wagmi'
+import { useContract, useProvider, useSigner, useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const ButtonStyle = `
@@ -20,6 +20,8 @@ const CONTRACT_ADDRESS = '0x62F2492668f40e699F6B20D9db89cB173a58031F'
 
 function Web3Events() {
     const [stringToDisplay, setStringToDisplay] = useState<string>('')
+
+    const { address } = useAccount()
 
     const provider = useProvider()
     const { data: signer } = useSigner()
@@ -60,7 +62,7 @@ function Web3Events() {
 
     const mintTicket = async () => {
         try {
-            let nftTxn = await contractSigner.mint()
+            let nftTxn = await contractSigner.mint({ from: address, value: 1 })
             console.log("Minting.....")
             await nftTxn.wait()
             console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`)
