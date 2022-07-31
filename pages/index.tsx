@@ -10,7 +10,7 @@ import Layout from '../src/components/Layout'
 import EventsCarousel from '../src/components/EventsCarousel'
 import Navbar from '../src/components/Navbar'
 
-const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
+const CONTRACT_ADDRESS = '0x62F2492668f40e699F6B20D9db89cB173a58031F'
 
 
 const Home = () => {

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { useAccount, useProvider, useContract, useSigner } from 'wagmi'
-const CONTRACT_ADDRESS = '0xEC3DFeE8e911Aa06B55788C9C3eDED67383da817'
+const CONTRACT_ADDRESS = '0x62F2492668f40e699F6B20D9db89cB173a58031F'
 import contractInterface from '../src/utils/abi.json'
 
 function Admin() {
-    const [isSaleActive, setIsSaleActive] = useState<boolean>(true)
+    const [isSaleActive, setIsSaleActive] = useState<boolean>(false)
     const [scannedAddress, setScannedAddress] = useState<string>('')
     const [isOwner, setIsOwner] = useState<boolean>(false)
 
@@ -41,13 +41,11 @@ function Admin() {
     const openSale = async () => {
         if (!contractSigner) return;
         try {
-            console.log('pre OPEN_SALE sale is currently: ', isSaleActive)
             const openSaleTxn = await contractSigner.openSale()
             console.log('... opening sale')
             await openSaleTxn.wait()
             setIsSaleActive(true)
             console.log('complete!')
-            console.log('post OPEN_SALE sale is currently: ', isSaleActive)
             console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${openSaleTxn.hash}`)
 
         } catch (e) {
@@ -58,13 +56,11 @@ function Admin() {
     const closeSale = async () => {
         if (!contractSigner) return;
         try {
-            console.log('pre CLOSE_SALE sale is currently: ', isSaleActive)
             const closeSaleTxn = await contractSigner.closeSale()
             console.log('... closing sale')
             await closeSaleTxn.wait()
             setIsSaleActive(false)
             console.log('complete!')
-            console.log('post CLOSE_SALE sale is currently: ', isSaleActive)
             console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${closeSaleTxn.hash}`)
 
         } catch (e) {
@@ -96,18 +92,18 @@ function Admin() {
         }
     }
 
-    // useEffect(() => {
-    //     async function checkSale() {
-    //         try {
-    //             let isSaleOpen = await contractProvider.isSaleOpen()
-    //             setIsSaleActive(isSaleOpen)
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     }
+    useEffect(() => {
+        async function checkSale() {
+            try {
+                let isSaleOpen = await contractProvider.getSaleOpen()
+                setIsSaleActive(isSaleOpen)
+            } catch (e) {
+                console.log(e)
+            }
+        }
 
-    //     checkSale()
-    // }, [contractProvider])
+        checkSale()
+    })
 
     return (
         <div className="flex justify-center mt-60">
