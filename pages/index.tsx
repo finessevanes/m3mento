@@ -65,6 +65,7 @@ const Home = () => {
       <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-72' />
       <EventsCarousel href='music-venues' title='Music Venues' bgColor='bg-black text-white h-72' />
       <EventsCarousel href='web3-events' title='web3 Events' bgColor='bg-white h-72' />
+      <EventsCarousel href='my-events' title='Events' bgColor='bg-white h-72' />
     </div>
   )
 }
