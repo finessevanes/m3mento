@@ -14,7 +14,7 @@ type MyEventsProps = {
   }
 
  const MyEvents = ({ data }: MyEventsProps) => {
-    const CONTRACT_ADDRESS = '0x62F2492668f40e699F6B20D9db89cB173a58031F'
+    const CONTRACT_ADDRESS = '0xdAe8D7178ddE19EfF8ec77489168B6B3104bF0bc'
     const [isUserCheckedIn, setIsUserCheckedIn] = useState<boolean>(false)
     const [ addressSignedIn, setAddressSignedIn] = useState<string>('')
 
