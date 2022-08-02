@@ -98,8 +98,9 @@ const MyEventss = () => {
                     {tickets.length > 0 && address && tickets.map(ticket => (
                         <>
                             <h1 className='text-white font-semibold text-xl mb-2'>{ticket.name}</h1>
+                            <h1 className='text-white font-semibold mb-2'>Ticket # 00{ticket.token_id}</h1>
                             <h2 className='text-white font-semibold mb-2'>{ticket.description}</h2>
-                            <Image src={ticket.image_original_url} width={300} height={400} alt={ticket.description} style={imageStyle} />
+                            <Image src={ticket.image_original_url || ticket.image_preview_url} width={300} height={500} alt={ticket.description} style={imageStyle} />
                             <button disabled={isUserCheckedIn} className={ButtonStyle} onClick={handleCheckIn}>Check In</button>
                         </>
                     ))}

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['opensea.mypinata.cloud']
+    domains: ['opensea.mypinata.cloud', 'openseauserdata.com']
     }
 }
 
