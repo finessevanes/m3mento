@@ -10,7 +10,7 @@ import Layout from '../src/components/Layout'
 import EventsCarousel from '../src/components/EventsCarousel'
 import Navbar from '../src/components/Navbar'
 
-const CONTRACT_ADDRESS = '0xdAe8D7178ddE19EfF8ec77489168B6B3104bF0bc'
+const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
 
 
 const Home = () => {
@@ -62,10 +62,10 @@ const Home = () => {
       </div>
       <h3 className='text-white text-2xl text-center'>Concert tickets for the fans</h3>
       <h1 className='text-white text-6xl text-center'>m3mento</h1>
-      <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-72' />
-      <EventsCarousel href='music-venues' title='Music Venues' bgColor='bg-black text-white h-72' />
-      <EventsCarousel href='web3-events' title='web3 Events' bgColor='bg-white h-72' />
-      <EventsCarousel href='my-events' title='Events' bgColor='bg-white h-72' />
+      <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-48' />
+      <EventsCarousel href='music-venues' title='Music Venues' bgColor='bg-black text-white h-48' />
+      <EventsCarousel href='web3-events' title='web3 Events' bgColor='bg-white h-48' />
+      <EventsCarousel href='my-events' title='Events' bgColor='bg-black text-white h-48' />
     </div>
   )
 }

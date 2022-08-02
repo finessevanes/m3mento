@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useAccount, useProvider, useContract, useSigner } from 'wagmi'
-const CONTRACT_ADDRESS = '0xdAe8D7178ddE19EfF8ec77489168B6B3104bF0bc'
+const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
 import contractInterface from '../src/utils/abi.json'
 
 function Admin() {
