@@ -3,15 +3,13 @@ import Image from 'next/image'
 import { useAccount, useProvider, useContract, useSigner } from 'wagmi'
 import contractInterface from '../src/utils/abi.json'
 import { ConnectButton, connectorsForWallets } from '@rainbow-me/rainbowkit';
+import Layout from '../src/components/Layout'
 
 const MyEventss = () => {
     const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
     const [isUserCheckedIn, setIsUserCheckedIn] = useState(false)
     const [addressSignedIn, setAddressSignedIn] = useState('')
     const [tickets, setTickets] = useState([])
-
-    console.log('hello', tickets)
-
 
     const ButtonStyle = `
     bg-gradient-200 hover:bg-gradient-250 text-white py-2 px-4 rounded shadow mt-2 disabled:bg-gradient-100
@@ -91,8 +89,7 @@ const MyEventss = () => {
 
 
     return (
-        <>
-            <ConnectButton />
+        <Layout title='my events | m3mento'>
             <div className="flex justify-center mt-60">
                 <div className="rounded-lg flex flex-col p-12 text-center">
                     {tickets.length > 0 && address && tickets.map(ticket => (
@@ -101,7 +98,7 @@ const MyEventss = () => {
                             <h1 className='text-white font-semibold mb-2'>Ticket # 00{ticket.token_id}</h1>
                             <h2 className='text-white font-semibold mb-2'>{ticket.description}</h2>
                             <Image src={ticket.image_original_url || ticket.image_preview_url} width={300} height={500} alt={ticket.description} style={imageStyle} />
-                            <button disabled={isUserCheckedIn} className={ButtonStyle} onClick={handleCheckIn}>Check In</button>
+                            <button className={ButtonStyle} onClick={handleCheckIn}>Check In</button>
                         </>
                     ))}
                     {!tickets.length && (
@@ -109,7 +106,7 @@ const MyEventss = () => {
                     )}
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 

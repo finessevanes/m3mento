@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import Head from 'next/head'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import contractInterface from '../src/utils/abi.json'
 import Link from 'next/link';
@@ -44,20 +43,42 @@ const Home = () => {
     checkIfAdmin()
   })
   return (
-    <div className=''>
+    <Layout title='m3mento'>
       <div className="bg-hero-cover bg-cover">
-        <div className={`flex top-0 sticky z-40 justify-between`}>
+        <div className='flex top-0 sticky z-40'>
           {isAdmin &&
-              (<Link href='/admin'>
-                <a>
-                  Admin
-                </a>
-              </Link>)
+            (<Link href='/admin'>
+              <a>
+                Admin
+              </a>
+            </Link>)
           }
-          <div className='mt-3 mr-3'><ConnectButton /></div>
         </div>
-        <div className="object-fill h-screen z-20 w-full flex justify-center items-end">
-          <h1 className='absolute text-white mb-24'>Miss collecting your favorite tickets? We do too.</h1>
+        <div className="object-fill h-screen z-20 w-full flex items-center text-white" style={{ border: '2px red solid' }}>
+          <div style={{ border: '2px white solid' }}>
+            <h1 className='text-6xl'>Discover, Mint, & Sell NFTs Tickets</h1>
+            <p className='text-xl'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+              Button
+            </button>
+            <Link href='/about'>
+              <a>
+                Learn More
+              </a>
+            </Link>
+          </div>
+          <div style={{ border: '2px green solid' }}>
+            <h1 className='text-6xl'>Discover, Mint, & Sell NFTs Tickets</h1>
+            <p className='text-xl'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+              Button
+            </button>
+            <Link href='/about'>
+              <a>
+                Learn More
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
       <h3 className='text-white text-2xl text-center'>Concert tickets for the fans</h3>
@@ -66,7 +87,7 @@ const Home = () => {
       <EventsCarousel href='music-venues' title='Music Venues' bgColor='bg-black text-white h-48' />
       <EventsCarousel href='web3-events' title='web3 Events' bgColor='bg-white h-48' />
       <EventsCarousel href='my-events' title='Events' bgColor='bg-black text-white h-48' />
-    </div>
+    </Layout>
   )
 }
 

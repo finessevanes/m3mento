@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-cover': "url('../src/img/nathan-fertig-IW5Bm4rB9OA-unsplash.jpg')",
+        'hero-cover': "url('../src/img/hero-image.jpeg')",
       },
       colors: {
         'gradient-100': '#E9B6C7',
