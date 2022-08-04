@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useAccount, useProvider, useContract, useSigner } from 'wagmi'
 const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
 import contractInterface from '../src/utils/abi.json'
+import Layout from "../src/components/Layout"
 
 function Admin() {
     const [isSaleActive, setIsSaleActive] = useState<boolean>(false)
@@ -76,7 +77,7 @@ function Admin() {
             await checkInTxn.wait()
             console.log('complete!')
             console.log(`TRANSACTION: https://rinkeby.etherscan.io/tx/${checkInTxn.hash}`)
- 
+
         } catch (e) {
             console.log(e)
         }
@@ -106,17 +107,19 @@ function Admin() {
     })
 
     return (
-        <div className="flex justify-center mt-60">
-            <div className="bg-red-100 rounded-lg flex flex-col p-12 text-center">
-                <h1 className="">Admin Panel</h1>
-                {isSaleActive ? <h1>ON SALE</h1> : <h1>... check back later</h1>}
-                <button onClick={openSale} className={ButtonStyle} disabled={isSaleActive}>Open Sale</button>
-                <button onClick={closeSale} className={ButtonStyle} disabled={!isSaleActive}>Close Sale</button>
-                <h2>Scan User</h2>
-                <input onChange={handleScan} />
-                {isOwner && <button onClick={checkIn} className={ButtonStyle} >Check In</button>}
+        <Layout title='admin | m3mento'>
+            <div className="flex justify-center mt-60">
+                <div className="bg-red-100 rounded-lg flex flex-col p-12 text-center">
+                    <h1 className="">Admin Panel</h1>
+                    {isSaleActive ? <h1>ON SALE</h1> : <h1>... check back later</h1>}
+                    <button onClick={openSale} className={ButtonStyle} disabled={isSaleActive}>Open Sale</button>
+                    <button onClick={closeSale} className={ButtonStyle} disabled={!isSaleActive}>Close Sale</button>
+                    <h2>Scan User</h2>
+                    <input onChange={handleScan} />
+                    {isOwner && <button onClick={checkIn} className={ButtonStyle} >Check In</button>}
+                </div>
             </div>
-        </div>
+        </Layout>
     )
 }
 

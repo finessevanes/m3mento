@@ -44,13 +44,13 @@ const Home = () => {
   return (
     <Layout title='m3mento'>
       <div className="bg-hero-cover bg-cover">
-        <div className="object-fill h-screen z-20 w-full -mt-12 text-white font-poppins">
-          <div className='flex flex-row p-10'>
+        <div className="object-fill h-screen z-20 w-full -mt-12">
+          <div className='flex p-10 justify-center'>
             <div className='mt-80'>
               <h1 className='text-6xl mb-3'>Discover, Mint, & Sell NFTs Tickets</h1>
               <p className='text-xl mb-5'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
               <div className='flex items-center'>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-14">
+                <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14">
                   Mint Tickets
                 </button>
                 <Link href='/about'>
@@ -81,9 +81,6 @@ const Home = () => {
         </div>
       </div>
       <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-48' />
-      <EventsCarousel href='music-venues' title='Music Venues' bgColor='bg-black text-white h-48' />
-      <EventsCarousel href='web3-events' title='web3 Events' bgColor='bg-white h-48' />
-      <EventsCarousel href='my-events' title='Events' bgColor='bg-black text-white h-48' />
     </Layout>
   )
 }

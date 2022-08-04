@@ -20,7 +20,7 @@ type MyEventsProps = {
 
 
     const ButtonStyle = `
-    bg-gradient-200 hover:bg-gradient-250 text-white py-2 px-4 rounded shadow mt-2 disabled:bg-gradient-100
+    bg-gradient-200 hover:bg-gradient-250 py-2 px-4 rounded shadow mt-2 disabled:bg-gradient-100
     `
 
     const provider = useProvider()

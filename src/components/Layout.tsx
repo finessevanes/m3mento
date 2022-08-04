@@ -19,11 +19,11 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header className='sticky top-0 z-20'>
-        <div className='flex text-white' style={{ alignItems: 'center', justifyContent: 'space-around' }}>
+        <div className='flex' style={{ alignItems: 'center', paddingTop: '6px', justifyContent: 'space-around' }}>
           <Link href="/">
             <h1 className=''>m3mento</h1>
           </Link>
-          <Link href='/admin'>
+          <Link href='/admin/event'>
             <a>
               Admin
             </a>
