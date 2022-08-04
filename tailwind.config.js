@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-cover': "url('../src/img/hero-image.jpeg')",
+        'hero-cover': "url('../src/img/hero-gradient.gif')",
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif']

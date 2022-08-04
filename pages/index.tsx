@@ -44,51 +44,33 @@ const Home = () => {
   return (
     <Layout title='m3mento'>
       <div className="bg-hero-cover bg-cover">
-        <div className="object-fill h-screen z-20 w-full flex items-center text-white font-poppins">
-
-          <div className='flex' style={{ border: '2px solid red' }}>
-            <div style={{ border: '2px white solid' }}>
-              <h1 className='text-6xl'>Discover, Mint, & Sell NFTs Tickets</h1>
-              <p className='text-xl'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                Mint Tickets
-              </button>
-              <Link href='/about'>
-                <a>
-                  Learn More
-                </a>
-              </Link>
+        <div className="object-fill h-screen z-20 w-full -mt-12 text-white font-poppins">
+          <div className='flex flex-row p-10'>
+            <div className='mt-80'>
+              <h1 className='text-6xl mb-3'>Discover, Mint, & Sell NFTs Tickets</h1>
+              <p className='text-xl mb-5'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
+              <div className='flex items-center'>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-14">
+                  Mint Tickets
+                </button>
+                <Link href='/about'>
+                  <a>
+                    Learn More
+                  </a>
+                </Link>
+              </div>
             </div>
-
-            <div className='flex' style={{ border: '2px green solid', position: 'relative' }}>
+            <div className='flex mt-80'>
               <Image
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  zIndex: 9,
-                }}
                 src={tilted1}
                 alt="ticket"
                 className='' />
               <Image
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  zIndex: 15,
-                }}
                 src={tilted2}
                 alt="ticket"
                 className=''
               />
               <Image
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  zIndex: 9,
-                }}
                 src={tilted3}
                 alt="ticket"
                 className='' />
