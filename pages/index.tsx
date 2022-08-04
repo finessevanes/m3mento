@@ -1,16 +1,15 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import contractInterface from '../src/utils/abi.json'
 import Link from 'next/link';
-
 import { useAccount, useProvider, useContract } from 'wagmi'
+import tilted1 from '../src/img/tilted-1.svg'
+import tilted2 from '../src/img/tilted-2.svg'
+import tilted3 from '../src/img/tilted-3.svg'
 import Layout from '../src/components/Layout'
 import EventsCarousel from '../src/components/EventsCarousel'
-import Navbar from '../src/components/Navbar'
-
 const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
-
+import Image from "next/image";
 
 const Home = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -46,13 +45,6 @@ const Home = () => {
     <Layout title='m3mento'>
       <div className="bg-hero-cover bg-cover">
         <div className='flex top-0 sticky z-40'>
-          {isAdmin &&
-            (<Link href='/admin'>
-              <a>
-                Admin
-              </a>
-            </Link>)
-          }
         </div>
         <div className="object-fill h-screen z-20 w-full flex items-center text-white" style={{ border: '2px red solid' }}>
           <div style={{ border: '2px white solid' }}>
@@ -67,22 +59,41 @@ const Home = () => {
               </a>
             </Link>
           </div>
-          <div style={{ border: '2px green solid' }}>
-            <h1 className='text-6xl'>Discover, Mint, & Sell NFTs Tickets</h1>
-            <p className='text-xl'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-              Button
-            </button>
-            <Link href='/about'>
-              <a>
-                Learn More
-              </a>
-            </Link>
+          <div className='flex' style={{ border: '2px green solid', position: 'relative' }}>
+            <Image
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 9,
+              }}
+              src={tilted1}
+              alt="ticket"
+              className='' />
+            <Image
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 15,
+              }}
+              src={tilted2}
+              alt="ticket"
+              className=''
+            />
+            Ï<Image
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 9,
+              }}
+              src={tilted3}
+              alt="ticket"
+              className='' />
           </div>
         </div>
       </div>
-      <h3 className='text-white text-2xl text-center'>Concert tickets for the fans</h3>
-      <h1 className='text-white text-6xl text-center'>m3mento</h1>
       <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-48' />
       <EventsCarousel href='music-venues' title='Music Venues' bgColor='bg-black text-white h-48' />
       <EventsCarousel href='web3-events' title='web3 Events' bgColor='bg-white h-48' />
