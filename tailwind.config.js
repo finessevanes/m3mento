@@ -10,7 +10,8 @@ module.exports = {
         'hero-cover': "url('../src/img/hero-gradient.gif')",
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif']
+        poppins: ['Poppins', 'sans-serif'],
+        tech: ['Share Tech Mono', 'monospace']
       },
       colors: {
         'gradient-100': '#E9B6C7',

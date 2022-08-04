@@ -2,6 +2,8 @@ import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Image from "next/image";
+import logo from '../img/logo.svg'
 
 type Props = {
   children?: ReactNode
@@ -17,16 +19,16 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header className='sticky top-0 z-20'>
-        <div className='flex' style={{ alignItems: 'center', justifyContent: 'space-around' }}>
+        <div className='flex text-white' style={{ alignItems: 'center', justifyContent: 'space-around' }}>
           <Link href="/">
-            <a>m3mento</a>
+            <h1 className=''>m3mento</h1>
           </Link>
           <Link href='/admin'>
             <a>
               Admin
             </a>
           </Link>
-          <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'grey', opacity: '.3', paddingInline: '9px', paddingBlock: '3px' }} />
+          <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'rgba(255, 255, 255, .6)', paddingInline: '9px', paddingBlock: '3px'}} />
           <Link href="/my-events">
             <a>My assets</a>
           </Link>
