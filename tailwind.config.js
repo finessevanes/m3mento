@@ -9,6 +9,9 @@ module.exports = {
       backgroundImage: {
         'hero-cover': "url('../src/img/hero-image.jpeg')",
       },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif']
+      },
       colors: {
         'gradient-100': '#E9B6C7',
         'gradient-200': '#8F2A4B',
@@ -31,5 +34,3 @@ module.exports = {
   },
   plugins: [],
 }
-
-// src/img/nathan-fertig-IW5Bm4rB9OA-unsplash.jpg
