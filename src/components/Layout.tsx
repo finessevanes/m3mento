@@ -36,7 +36,7 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
         </div>
       </header>
       {children}
-      <footer className='bg-red-100'>
+      <footer style={{ position: 'absolute', bottom: 0, width: '100%', height: '250px', backgroundColor: '#0E1135' }}>
         <span>FOOOTER</span>
       </footer>
     </div>
