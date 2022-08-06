@@ -4,9 +4,9 @@ import { useAccount, useProvider, useContract, useSigner } from "wagmi";
 import contractInterface from "../src/utils/abi.json";
 import { ConnectButton, connectorsForWallets } from "@rainbow-me/rainbowkit";
 import Layout from "../src/components/Layout";
+import { CONTRACT_ADDRESS } from "../web3-constants";
 
 const MyEventss = () => {
-  const CONTRACT_ADDRESS = "0x4c8834DBfB88aeF261D6B47158d3547123fDED29";
   const [isUserCheckedIn, setIsUserCheckedIn] = useState(false);
   const [addressSignedIn, setAddressSignedIn] = useState("");
   const [tickets, setTickets] = useState([]);
