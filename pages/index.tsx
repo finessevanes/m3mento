@@ -47,8 +47,8 @@ const Home = () => {
         <div className="object-fill h-screen z-20 w-full -mt-12">
           <div className='flex p-10 justify-center'>
             <div className='mt-80'>
-              <h1 className='text-6xl mb-3'>Discover, Mint, & Sell NFTs Tickets</h1>
-              <p className='text-xl mb-5'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
+              <h1 className='text-6xl mb-3'>Capture The Nostalogia Forever</h1>
+              <p className='text-xl mb-5'>An NFT ticking service where fans can mint, sell, and collect their concert tickets</p>
               <div className='flex items-center'>
                 <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14">
                   <Link href='/events/web3-events/nights-and-weekends-demo-day'>
