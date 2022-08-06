@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { TicketSVG } from '../src/components/TicketSVG'
-import contractInterface from '../src/utils/abi.json'
+import { TicketSVG } from '../../../src/components/TicketSVG'
+import contractInterface from '../../../src/utils/abi.json'
 import { useContract, useProvider, useSigner, useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
@@ -17,7 +17,7 @@ mt-4
 `
 const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
 
-function Web3Events() {
+function NightsAndWeekendsDemoDay() {
     const [stringToDisplay, setStringToDisplay] = useState<string>('')
 
     const { address } = useAccount()
@@ -84,4 +84,4 @@ function Web3Events() {
     )
 }
 
-export default Web3Events
+export default NightsAndWeekendsDemoDay

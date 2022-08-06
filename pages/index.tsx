@@ -51,7 +51,11 @@ const Home = () => {
               <p className='text-xl mb-5'>Digital place for crypto collection and Non Fungible Token (NFT).Discover digital collections.</p>
               <div className='flex items-center'>
                 <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14">
-                  Mint Tickets
+                  <Link href='/events/web3-events/nights-and-weekends-demo-day'>
+                    <a>
+                      Mint Tickets
+                    </a>
+                  </Link>
                 </button>
                 <Link href='/about'>
                   <a>
@@ -76,8 +80,6 @@ const Home = () => {
                 className='' />
             </div>
           </div>
-
-
         </div>
       </div>
       <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-48' />
