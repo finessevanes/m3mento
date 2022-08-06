@@ -11,6 +11,8 @@ const MyEventss = () => {
   const [addressSignedIn, setAddressSignedIn] = useState("");
   const [tickets, setTickets] = useState([]);
 
+  const [isLoadingInfo, setIsLoadingInfo] = useState(true);
+
   const ButtonStyle = `
     bg-gradient-200 hover:bg-gradient-250 text-white py-2 px-4 rounded shadow mt-2 disabled:bg-gradient-100
     `;
@@ -52,19 +54,52 @@ const MyEventss = () => {
   };
 
   useEffect(() => {
-    if (!addressSignedIn) return;
     const checkIfUserHoldsTicket = async () => {
       try {
-        let confirmOwnership = await contractProvider.getConfirmOwnership(
-          addressSignedIn
-        );
-        console.log("confirmOwnership: ", confirmOwnership);
+        // console.log(" 🧑‍💻 🧑‍💻 🧑‍💻 🧑‍💻 🧑‍💻 Reading the tickets for : ", addressSignedIn);
+        let userTickets = await contractSigner.getUserTickets();
+        // console.log("owned tickets: 👥👥👥👥👥 ", userTickets.length);
+        let allTokensInfo;
+        if (userTickets.length > 0) {
+          allTokensInfo = await Promise.all(
+            userTickets.map(async (tokenId) => {
+              const fetchedTokenURI = await contractSigner.tokenURI(tokenId);
+              const base64string = fetchedTokenURI.substring(
+                fetchedTokenURI.indexOf(",") + 1
+              );
+
+              // decode base64 string, remove header
+              let decodedObject = JSON.parse(atob(base64string));
+              console.log("decodedObject: ", decodedObject);
+              console.log(" IMAGE 🅿️ 🅿️ 🅿️ ", decodedObject.image);
+              if (
+                decodedObject.image ===
+                "ipfs://QmbeECCAZnZdkdF2yVu23DQHsu4uc3WSnsMS1gnwP4j8L3"
+              ) {
+                decodedObject.image =
+                  "https://ipfs.infura.io/ipfs/QmbeECCAZnZdkdF2yVu23DQHsu4uc3WSnsMS1gnwP4j8L3";
+              }
+              decodedObject.tokenId = parseInt(tokenId);
+
+              return decodedObject;
+            })
+          );
+        }
+
+        if (allTokensInfo) {
+          console.log(" ALL TOKENS INFO: ");
+          console.log(allTokensInfo);
+          setTickets(allTokensInfo);
+        }
+        setIsLoadingInfo(false);
       } catch (e) {
         console.log(e);
       }
     };
-    checkIfUserHoldsTicket();
-  });
+    if (contractSigner) {
+      checkIfUserHoldsTicket();
+    }
+  }, [contractSigner]);
 
   useEffect(() => {
     if (!address) return;
@@ -75,28 +110,48 @@ const MyEventss = () => {
     checkAddress();
   }, [address]);
 
-  useEffect(() => {
-    if (!address) return;
-    console.log(address);
+  //   useEffect(() => {
+  //     if (!address) return;
+  //     console.log(address);
 
-    const openSeaQuery = `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${CONTRACT_ADDRESS}`;
+  //     const openSeaQuery = `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${CONTRACT_ADDRESS}`;
 
-    console.log(" QUERY 🦭", openSeaQuery);
-    fetch(
-      `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${CONTRACT_ADDRESS}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(" 🥰🥰🥰🥰 TOTAL IS: ", data.assets.length);
+  //     console.log(" QUERY 🦭", openSeaQuery);
+  //     fetch(
+  //       `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${CONTRACT_ADDRESS}`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log(" 🥰🥰🥰🥰 TOTAL IS: ", data.assets.length);
 
-        console.log(" 🥰🥰🥰🥰 DATA: ", data);
+  //         console.log(" 🥰🥰🥰🥰 DATA: ", data);
 
-        if (data.assets?.length) {
-          setTickets(data.assets);
-        }
-      })
-      .catch((e) => console.log(e));
-  }, [address]);
+  //         if (data.assets?.length) {
+  //           setTickets(data.assets);
+  //         }
+  //       })
+  //       .catch((e) => console.log(e));
+  //   }, [address]);
+
+  if (isLoadingInfo) {
+    return (
+      <Layout title="my events | m3mento">
+        <div className="flex justify-center mt-16">
+          <div>Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (tickets.length === 0) {
+    return (
+      <Layout title="my events | m3mento">
+        <div className="flex justify-center mt-16">
+          <div>You dont have tickets 🥲</div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout title="my events | m3mento">
@@ -109,37 +164,43 @@ const MyEventss = () => {
               tickets.map((ticket, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center mx-2"
+                  className="flex flex-col items-center justify-center mx-2 md:mx-4 xl:mx-12 mb-6 md:mb-20"
                 >
                   <h1 className="text-white font-semibold text-xl mb-2">
                     {ticket.name}
                   </h1>
                   <h1 className="font-thin mb-2 text-gray-400 text-xl">
-                    Ticket # 00{ticket.token_id}
+                    Ticket # 00{ticket.tokenId}
                   </h1>
                   <h2 className="text-white font-semibold text-sm mb-2 px-2 max-w-[200px]">
                     {ticket.description}
                   </h2>
                   <Image
-                    src={ticket.image_original_url || ticket.image_preview_url}
+                    src={ticket.image}
                     width={300}
                     height={500}
                     alt={ticket.description}
                     style={imageStyle}
                   />
-                  <button
-                    className={ButtonStyle}
-                    onClick={() => handleCheckIn(ticket.token_id)}
-                  >
-                    Check In
-                  </button>
+                  {ticket.attributes[0].value === "false" ? (
+                    <button
+                      className={ButtonStyle}
+                      onClick={() => handleCheckIn(ticket.tokenId)}
+                    >
+                      Check In
+                    </button>
+                  ) : (
+                    <div className="opacity-80">
+                      <div
+                        className="bg-gradient-to-r from-cyan-500 to-blue-500 my-2
+                      px-8 py-2 rounded-lg cursor-default select-none tracking-wide text-sm"
+                      >
+                        USED
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
-            {!tickets.length && (
-              <h1 className="text-white font-semibold text-xl mb-2">
-                You dont have tickets 🥲
-              </h1>
-            )}
           </div>
         </div>
       </div>
