@@ -168,7 +168,7 @@ const MyEventss = () => {
       <div className="flex justify-center mt-16">
         <div>
           <div className="text-4xl text-center mb-8">My Events</div>
-          <div className="rounded-lg flex flex-wrap p-4 md:p-8 text-center mb-32 justify-center md:justify-between md:min-w-[800px]">
+          <div className="rounded-lg flex flex-wrap p-4 md:p-8 text-center mb-32 justify-center md:justify-center md:min-w-[800px]">
             {tickets.length > 0 &&
               address &&
               tickets.map((ticket, index) => (

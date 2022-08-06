@@ -1,42 +1,31 @@
-import '../styles/globals.css'
-import '@rainbow-me/rainbowkit/styles.css';
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+import type { AppProps } from "next/app";
 
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-} from '@rainbow-me/rainbowkit';
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
-import {
-  chain,
-  configureChains,
-  createClient,
-  WagmiConfig
-} from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
-
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
+  [chain.polygon],
   [
-    chain.rinkeby
-  ],
-  [
-    alchemyProvider({ alchemyId: process.env.ALCHEMY_KEY_RINKEBY }),
-    publicProvider()
+    alchemyProvider({ alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON }),
+    publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
-  chains
+  appName: "m3mento",
+  chains,
 });
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider
-})
+  provider,
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -45,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
