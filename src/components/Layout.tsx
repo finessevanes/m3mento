@@ -33,7 +33,7 @@ const Layout = ({ children, title = 'm3mento' }: Props) => {
       console.log('owner of contract:', ownerOfContract)
       console.log('address', address)
       if (address === ownerOfContract) {
-        console.log('this is true')
+        setIsAdmin(true)
       } else {
         setIsAdmin(false)
       }
