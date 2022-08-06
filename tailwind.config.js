@@ -1,37 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       backgroundImage: {
-        'hero-cover': "url('../src/img/hero-gradient.gif')",
+        "hero-cover": "url('/hero-gradient.gif')",
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        tech: ['Share Tech Mono', 'monospace']
+        poppins: ["Poppins", "sans-serif"],
+        tech: ["Share Tech Mono", "monospace"],
       },
       colors: {
-        'gradient-100': '#E9B6C7',
-        'gradient-200': '#8F2A4B',
-        'gradient-250': '#72223c',
-        'gradient-300': '#060A1F',
-        'gradient-350': '#1e2235'
+        "gradient-100": "#E9B6C7",
+        "gradient-200": "#8F2A4B",
+        "gradient-250": "#72223c",
+        "gradient-300": "#060A1F",
+        "gradient-350": "#1e2235",
       },
       height: {
-        '10': '40rem',
+        10: "40rem",
       },
       fontSize: {
-        x69: ['9rem', {
-          lineHeight: '9rem',
-        }],
-        xTitle: ['3.5rem', {
-          lineHeight: '2.8rem',
-        }]
-      }
+        x69: [
+          "9rem",
+          {
+            lineHeight: "9rem",
+          },
+        ],
+        xTitle: [
+          "3.5rem",
+          {
+            lineHeight: "2.8rem",
+          },
+        ],
+      },
     },
   },
   plugins: [],
-}
+};
