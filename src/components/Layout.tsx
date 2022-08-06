@@ -1,7 +1,10 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import contractInterface from '../utils/abi.json';
+import { useAccount, useProvider, useContract } from 'wagmi'
+import { CONTRACT_ADDRESS } from "../../web3-constants";
 import Image from "next/image";
 import logo from '../img/logo.svg'
 
@@ -10,7 +13,39 @@ type Props = {
   title?: string
 }
 
-const Layout = ({ children, title = 'm3mento' }: Props) => (
+const Layout = ({ children, title = 'm3mento' }: Props) => {
+  const { address } = useAccount()
+
+  const provider = useProvider()
+
+  const contractProvider = useContract({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: contractInterface.abi,
+    signerOrProvider: provider,
+  })
+
+  const [isAdmin, setIsAdmin] = useState<boolean>(false)
+
+  const checkIfAdmin = async () => {
+    if (!contractProvider) return;
+    try {
+      const ownerOfContract = await contractProvider.owner()
+      console.log('owner of contract:', ownerOfContract)
+      console.log('address', address)
+      if (address === ownerOfContract) {
+        console.log('this is true')
+      } else {
+        setIsAdmin(false)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    checkIfAdmin()
+  })
+  return (
     <div>
       <Head>
         <title>{title}</title>
@@ -22,12 +57,20 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
           <Link href="/">
             <h1 className=''>m3mento</h1>
           </Link>
-          <Link href='/admin/event'>
-            <a>
-              admin
-            </a>
-          </Link>
-          <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'rgba(255, 255, 255, .6)', paddingInline: '9px', paddingBlock: '3px'}} />
+          {isAdmin ?
+            (<Link href='/admin/event'>
+              <a>
+                admin
+              </a>
+            </Link>)
+            :
+            (<Link href='/events/web3-events/nights-and-weekends-demo-day'>
+              <a>
+                events
+              </a>
+            </Link>)
+          }
+          <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'rgba(255, 255, 255, .6)', paddingInline: '9px', paddingBlock: '3px' }} />
           <Link href="/my-events">
             <a>my events</a>
           </Link>
@@ -36,6 +79,8 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
       </header>
       {children}
     </div>
-)
+  )
+
+}
 
 export default Layout
