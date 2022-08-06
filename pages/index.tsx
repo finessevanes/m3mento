@@ -7,7 +7,6 @@ import tilted1 from '../src/img/tilted-1.svg'
 import tilted2 from '../src/img/tilted-2.svg'
 import tilted3 from '../src/img/tilted-3.svg'
 import Layout from '../src/components/Layout'
-import EventsCarousel from '../src/components/EventsCarousel'
 const CONTRACT_ADDRESS = '0xC3fC059398F4D5D8C068d09eD6a7Ad1461803B6F'
 import Image from "next/image";
 
@@ -82,7 +81,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <EventsCarousel href='festivals' title='Festivals' bgColor='bg-white h-48' />
     </Layout>
   )
 }

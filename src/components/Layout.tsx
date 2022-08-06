@@ -11,7 +11,6 @@ type Props = {
 }
 
 const Layout = ({ children, title = 'm3mento' }: Props) => (
-  <>
     <div>
       <Head>
         <title>{title}</title>
@@ -36,11 +35,7 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
         </div>
       </header>
       {children}
-      <footer style={{bottom: 0, width: '100%', height: '250px', backgroundColor: '#0E1135' }}>
-        <span>FOOOTER</span>
-      </footer>
     </div>
-  </>
 )
 
 export default Layout

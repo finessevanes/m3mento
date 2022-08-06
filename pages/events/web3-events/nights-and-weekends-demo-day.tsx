@@ -3,6 +3,7 @@ import { TicketSVG } from '../../../src/components/TicketSVG'
 import contractInterface from '../../../src/utils/abi.json'
 import { useContract, useProvider, useSigner, useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Layout from "../../../src/components/Layout";
 
 const ButtonStyle = `
 bg-gradient-200
@@ -72,15 +73,12 @@ function NightsAndWeekendsDemoDay() {
     }
 
     return (
-        <>
-            <div className='flex justify-end top-0 sticky z-40'>
-                <div className='mt-3 mr-3'><ConnectButton /></div>
-            </div>
-            <div className='flex self-start flex-col'>
+        <Layout title='demo day | m3mento'>
+            <div className='flex flex-col'>
                 <TicketSVG stringToDisplay={stringToDisplay} />
                 <button className={ButtonStyle} onClick={mintTicket}>Mint Ticket</button>
             </div>
-        </>
+        </Layout>
     )
 }
 
