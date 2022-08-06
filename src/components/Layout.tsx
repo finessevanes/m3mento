@@ -25,18 +25,18 @@ const Layout = ({ children, title = 'm3mento' }: Props) => (
           </Link>
           <Link href='/admin/event'>
             <a>
-              Admin
+              admin
             </a>
           </Link>
           <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'rgba(255, 255, 255, .6)', paddingInline: '9px', paddingBlock: '3px'}} />
           <Link href="/my-events">
-            <a>My assets</a>
+            <a>my events</a>
           </Link>
           <ConnectButton />
         </div>
       </header>
       {children}
-      <footer style={{ position: 'absolute', bottom: 0, width: '100%', height: '250px', backgroundColor: '#0E1135' }}>
+      <footer style={{bottom: 0, width: '100%', height: '250px', backgroundColor: '#0E1135' }}>
         <span>FOOOTER</span>
       </footer>
     </div>
