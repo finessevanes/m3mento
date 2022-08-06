@@ -133,6 +133,16 @@ const MyEventss = () => {
   //       .catch((e) => console.log(e));
   //   }, [address]);
 
+  if (!addressSignedIn) {
+    return (
+      <Layout title="my events | m3mento">
+        <div className="flex justify-center mt-16">
+          <div>Connect your wallet to see your tickets</div>
+        </div>
+      </Layout>
+    );
+  }
+
   if (isLoadingInfo) {
     return (
       <Layout title="my events | m3mento">
