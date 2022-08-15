@@ -71,8 +71,13 @@ const Layout = ({ children, title = 'm3mento' }: Props) => {
             </Link>)
           }
           <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'rgba(255, 255, 255, .6)', paddingInline: '9px', paddingBlock: '3px' }} />
-          <Link href="/my-events">
-            <a>my events</a>
+          {address && (
+            <Link href="/my-events">
+              <a>my events</a>
+            </Link>
+          )}
+          <Link href="/contact-us">
+            <a>contact us</a>
           </Link>
           <ConnectButton />
         </div>
