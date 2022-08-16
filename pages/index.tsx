@@ -42,13 +42,12 @@ const Home = () => {
   return (
     <Layout title="m3mento">
       <div className="bg-hero-cover bg-cover">
-        <div className="object-fill h-screen z-20 w-full -mt-12">
+        <div className="object-fill h-screen z-20 w-full -mt-20">
           <div className="flex p-10 justify-center">
             <div className="mt-80">
-              <h1 className="text-6xl mb-3 header-text">Capture The Nostalogia Forever</h1>
+              <h1 className="text-6xl mb-3 header-text">Capture The Nostalgia Forever</h1>
               <p className="text-xl mb-5 navbar">
-                An NFT ticking service where fans can mint, sell, and collect their
-                concert tickets
+                The best place to be a fan. Where fans can mint, sell, and collect their concert tickets
               </p>
               <div className="flex items-center navbar">
                 <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14">
