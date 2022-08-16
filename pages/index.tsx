@@ -56,7 +56,7 @@ const Home = () => {
                   </Link>
                 </button>
                 <div>
-                  <Link href="/about">
+                  <Link href="/contact-us">
                     <a className="learn-link">Learn More</a>
                   </Link>
                 </div>
