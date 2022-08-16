@@ -6,9 +6,9 @@
 
 body {
     background-color: #141943;
-    /* height: 100%; */
     color: white;
     font-family: Poppins, sans-serif;
     position: relative;
     min-height: 100vh;
 }
+

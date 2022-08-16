@@ -1,80 +1,127 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-import Link from 'next/link'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import contractInterface from '../utils/abi.json';
-import { useAccount, useProvider, useContract } from 'wagmi'
-import { CONTRACT_ADDRESS } from "../../web3-constants";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import Link from "next/link";
+import {Tab, Tabs} from "@material-ui/core";
 
-type Props = {
-    children?: ReactNode
-    title?: string
-}
 
-const Layout = ({ children, title = 'm3mento' }: Props) => {
-    const { address } = useAccount()
+const pages = ['Admin', 'Events', 'my events', 'contact us'];
 
-    const provider = useProvider()
+const ResponsiveAppBar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
-    const contractProvider = useContract({
-        addressOrName: CONTRACT_ADDRESS,
-        contractInterface: contractInterface.abi,
-        signerOrProvider: provider,
-    })
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
-    const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-    const checkIfAdmin = async () => {
-        if (!contractProvider) return;
-        try {
-            const ownerOfContract = await contractProvider.owner()
-            console.log('owner of contract:', ownerOfContract)
-            console.log('address', address)
-            if (address === ownerOfContract) {
-                setIsAdmin(true)
-            } else {
-                setIsAdmin(false)
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+  return (
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+        <Link href='/admin/event'>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            <a>m3mento</a>
+          </Typography>
+          </Link>
 
-    useEffect(() => {
-        checkIfAdmin()
-    })
-    return (
-        <header className='sticky top-0 z-20'>
-            <div className='flex' style={{ alignItems: 'center', paddingTop: '6px', justifyContent: 'space-around' }}>
-                <Link href="/">
-                    <h1 className=''>m3mento</h1>
-                </Link>
-                {isAdmin ?
-                    (<Link href='/admin/event'>
-                        <a>
-                            admin
-                        </a>
-                    </Link>)
-                    :
-                    (<Link href='/events/web3-events/nights-and-weekends-demo-day'>
-                        <a>
-                            events
-                        </a>
-                    </Link>)
-                }
-                <input placeholder='search...' className='rounded-lg' style={{ backgroundColor: 'rgba(255, 255, 255, .6)', paddingInline: '9px', paddingBlock: '3px' }} />
-                {address && (
-                    <Link href="/my-events">
-                        <a>my events</a>
-                    </Link>
-                )}
-                <Link href="/contact-us">
-                    <a>contact us</a>
-                </Link>
-                <ConnectButton />
-            </div>
-        </header>
-    )
-
-}
-
-export default Layout
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            m3mento
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
+export default ResponsiveAppBar;
