@@ -18,8 +18,8 @@ import contractInterface from '../utils/abi.json';
 
 const Navbar = () => {
     const [isAdmin, setIsAdmin] = useState<boolean>(false)
+    const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
     const { address } = useAccount()
-
     const provider = useProvider()
 
     const contractProvider = useContract({
@@ -54,9 +54,23 @@ const Navbar = () => {
         }
     }
 
+
+
     useEffect(() => {
         checkIfAdmin()
     })
+
+    useEffect(() => {
+        const checkIfSignedIn = async () => {
+            if (address){
+                setIsSignedIn(true)
+            } else {
+                setIsSignedIn(false)
+            }
+        }
+
+        checkIfSignedIn()
+    }, [address])
 
     return (
         <AppBar position="sticky" style={{ top: 0, zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
@@ -121,7 +135,7 @@ const Navbar = () => {
                                     <Typography textAlign="center">Events</Typography>
                                 </Link>
                             </MenuItem>
-                            {!address && <MenuItem onClick={handleCloseNavMenu}>
+                            {isSignedIn && <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/my-events'>
                                     <Typography textAlign="center">My Events</Typography>
                                 </Link>
@@ -151,7 +165,7 @@ const Navbar = () => {
                                 Events
                             </Button>
                         </Link>
-                        {!address && <Link href='/my-events'>
+                        {isSignedIn && <Link href='/my-events'>
                             <Button
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
