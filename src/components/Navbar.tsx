@@ -111,21 +111,21 @@ const Navbar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            <MenuItem onClick={handleCloseNavMenu}>
+                            {isAdmin && <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/admin'>
                                     <Typography textAlign="center">Admin</Typography>
                                 </Link>
-                            </MenuItem>
+                            </MenuItem>}
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/events'>
                                     <Typography textAlign="center">Events</Typography>
                                 </Link>
                             </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
+                            {!address && <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/my-events'>
                                     <Typography textAlign="center">My Events</Typography>
                                 </Link>
-                            </MenuItem>
+                            </MenuItem>}
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/contact-us'>
                                     <Typography textAlign="center">Contact Us</Typography>
@@ -134,14 +134,14 @@ const Navbar = () => {
                         </Menu>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Link href='/admin'>
+                        {isAdmin && <Link href='/admin'>
                             <Button
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 Admin
                             </Button>
-                        </Link>
+                        </Link>}
                         <Link href='/events'>
                             <Button
                                 key='Events'
@@ -151,15 +151,15 @@ const Navbar = () => {
                                 Events
                             </Button>
                         </Link>
-                        <Link href='/my-events'>
+                        {!address && <Link href='/my-events'>
                             <Button
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 My Events
                             </Button>
-                        </Link>
-                         <Link href='/contact-us'>
+                        </Link>}
+                        <Link href='/contact-us'>
                             <Button
                                 key='Admin'
                                 onClick={handleCloseNavMenu}

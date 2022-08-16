@@ -50,7 +50,7 @@ const Home = () => {
                 The best place to be a fan. Where fans can mint, sell, and collect their concert tickets
               </p>
               <div className="flex items-center">
-                <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14 mint-btn">
+                <button className="hover:bg-gradient-100 bg-gradient-250 font-bold py-2 px-4 rounded-full mr-14 mint-btn">
                   <Link href="/events/web3-events/nights-and-weekends-demo-day">
                     <a>Mint Tickets</a>
                   </Link>
