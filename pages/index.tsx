@@ -43,11 +43,11 @@ const Home = () => {
     <Layout title="m3mento">
       <div className="bg-hero-cover bg-cover">
         <div className="object-fill h-screen z-20 w-full">
-          <div className="flex md:flex-row flex-col md:p-10 p-5 md:justify-center justify-end h-full">
+          <div className="flex sm:flex-row flex-col md:p-10 p-5 md:justify-center justify-end h-full">
             <div className="header-text-container">
-              <h1 className="md:text-5xl text-4xl mb-3 header-text">Capture The Nostalgia Forever</h1>
+              <h1 className="md:text-5xl text-4xl mb-3 header-text">Capture the nostalgia, forever.</h1>
               <p className="md:text-xl text-md mb-5 sub-text">
-                The best place to be a fan. Mint, sell, and collect concert tickets from your favorite artists
+                Mint, sell, and collect concert tickets from your favorite artists. Get rewarded for being a fan.
               </p>
               <div className="flex items-center mt-20 md:mt-0">
                 <button className="hover:bg-gradient-100 bg-gradient-250 font-bold py-2 px-4 rounded-full mr-14 mint-btn">
@@ -62,7 +62,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            
             <div className="flex tickets">
               <Image src={tilted1} alt="ticket" className="" />
               <Image src={tilted2} alt="ticket" className="" />

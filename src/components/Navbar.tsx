@@ -54,21 +54,18 @@ const Navbar = () => {
         }
     }
 
-
-
     useEffect(() => {
         checkIfAdmin()
     })
 
     useEffect(() => {
         const checkIfSignedIn = async () => {
-            if (address){
+            if (address) {
                 setIsSignedIn(true)
             } else {
                 setIsSignedIn(false)
             }
         }
-
         checkIfSignedIn()
     }, [address])
 
@@ -79,23 +76,24 @@ const Navbar = () => {
                     <Link href='/'>
                         <Typography
                             variant="h6"
+                            className='shadow-lg shadow-cyan-500/50'
                             noWrap
                             component="a"
                             href="/"
                             sx={{
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
+                                fontFamily: 'Share Tech Mono',
                                 fontWeight: 700,
                                 letterSpacing: '.3rem',
-                                color: 'inherit',
+                                color: 'white',
                                 textDecoration: 'none',
+                                fontSize: '30px'
                             }}
                         >
                             <a>m3mento</a>
                         </Typography>
                     </Link>
-
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -131,7 +129,7 @@ const Navbar = () => {
                                 </Link>
                             </MenuItem>}
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <Link href='/events'>
+                                <Link href='/events/web3-events/nights-and-weekends-demo-day'>
                                     <Typography textAlign="center">Events</Typography>
                                 </Link>
                             </MenuItem>
@@ -145,9 +143,31 @@ const Navbar = () => {
                                     <Typography textAlign="center">Contact Us</Typography>
                                 </Link>
                             </MenuItem>
+                            <MenuItem>
+                                <ConnectButton />
+                            </MenuItem>
                         </Menu>
                     </Box>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Typography
+                        variant="h6"
+                        className='shadow-lg shadow-cyan-500/50'
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            fontFamily: 'Share Tech Mono',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'white',
+                            textDecoration: 'none',
+                            fontSize: '30px'
+                        }}
+                    >
+                        <a>m3mento</a>
+                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'space-around' }}>
                         {isAdmin && <Link href='/admin'>
                             <Button
                                 onClick={handleCloseNavMenu}
@@ -156,7 +176,7 @@ const Navbar = () => {
                                 Admin
                             </Button>
                         </Link>}
-                        <Link href='/events'>
+                        <Link href='/events/web3-events/nights-and-weekends-demo-day'>
                             <Button
                                 key='Events'
                                 onClick={handleCloseNavMenu}
@@ -182,11 +202,15 @@ const Navbar = () => {
                                 Contact Us
                             </Button>
                         </Link>
+                        <Button>
+                            <ConnectButton />
+                        </Button>
                     </Box>
-                    <ConnectButton />
+
                 </Toolbar>
             </Container>
         </AppBar>
     );
 };
+
 export default Navbar;
