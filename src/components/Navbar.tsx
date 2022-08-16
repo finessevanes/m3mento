@@ -10,8 +10,24 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Link from "next/link";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useProvider, useContract } from 'wagmi'
+import { CONTRACT_ADDRESS } from "../../web3-constants";
+import { useEffect, useState } from 'react';
+import contractInterface from '../utils/abi.json';
 
-const ResponsiveAppBar = () => {
+const Navbar = () => {
+    const [isAdmin, setIsAdmin] = useState<boolean>(false)
+    const { address } = useAccount()
+
+    const provider = useProvider()
+
+    const contractProvider = useContract({
+        addressOrName: CONTRACT_ADDRESS,
+        contractInterface: contractInterface.abi,
+        signerOrProvider: provider,
+    })
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -21,6 +37,26 @@ const ResponsiveAppBar = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const checkIfAdmin = async () => {
+        if (!contractProvider) return;
+        try {
+            const ownerOfContract = await contractProvider.owner()
+            console.log('owner of contract:', ownerOfContract)
+            console.log('address', address)
+            if (address === ownerOfContract) {
+                setIsAdmin(true)
+            } else {
+                setIsAdmin(false)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        checkIfAdmin()
+    })
 
     return (
         <AppBar position="sticky" style={{ top: 0, zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
@@ -75,52 +111,31 @@ const ResponsiveAppBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            <MenuItem key='Admin' onClick={handleCloseNavMenu}>
+                            <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/admin'>
                                     <Typography textAlign="center">Admin</Typography>
                                 </Link>
                             </MenuItem>
-                            <MenuItem key='Events' onClick={handleCloseNavMenu}>
+                            <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/events'>
                                     <Typography textAlign="center">Events</Typography>
                                 </Link>
                             </MenuItem>
-                            <MenuItem key='My Events' onClick={handleCloseNavMenu}>
+                            <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/my-events'>
                                     <Typography textAlign="center">My Events</Typography>
                                 </Link>
                             </MenuItem>
-                            <MenuItem key='Contact Us' onClick={handleCloseNavMenu}>
+                            <MenuItem onClick={handleCloseNavMenu}>
                                 <Link href='/contact-us'>
                                     <Typography textAlign="center">Contact Us</Typography>
                                 </Link>
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <Link href='/'>
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href=""
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            m3mento
-                        </Typography>
-                    </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Link href='/admin'>
                             <Button
-                                key='Admin'
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
@@ -129,7 +144,7 @@ const ResponsiveAppBar = () => {
                         </Link>
                         <Link href='/events'>
                             <Button
-                                key='Admin'
+                                key='Events'
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
@@ -138,14 +153,13 @@ const ResponsiveAppBar = () => {
                         </Link>
                         <Link href='/my-events'>
                             <Button
-                                key='Admin'
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 My Events
                             </Button>
                         </Link>
-                        <Link href='/contact-us'>
+                         <Link href='/contact-us'>
                             <Button
                                 key='Admin'
                                 onClick={handleCloseNavMenu}
@@ -155,9 +169,10 @@ const ResponsiveAppBar = () => {
                             </Button>
                         </Link>
                     </Box>
+                    <ConnectButton />
                 </Toolbar>
             </Container>
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
+export default Navbar;
