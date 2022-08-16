@@ -43,24 +43,26 @@ const Home = () => {
     <Layout title="m3mento">
       <div className="bg-hero-cover bg-cover">
         <div className="object-fill h-screen z-20 w-full -mt-20">
-          <div className="flex p-10 justify-center">
-            <div className="mt-80">
-              <h1 className="text-6xl mb-3 header-text">Capture The Nostalgia Forever</h1>
-              <p className="text-xl mb-5 navbar">
+          <div className="flex p-10 justify-center h-full">
+            <div className="mt-80 header-text-container">
+              <h1 className="text-5xl mb-3 header-text">Capture The Nostalgia Forever</h1>
+              <p className="text-xl mb-5 sub-text">
                 The best place to be a fan. Where fans can mint, sell, and collect their concert tickets
               </p>
-              <div className="flex items-center navbar">
-                <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14">
+              <div className="flex items-center">
+                <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mr-14 mint-btn">
                   <Link href="/events/web3-events/nights-and-weekends-demo-day">
                     <a>Mint Tickets</a>
                   </Link>
                 </button>
-                <Link href="/about">
-                  <a>Learn More</a>
-                </Link>
+                <div>
+                  <Link href="/about">
+                    <a className="learn-link">Learn More</a>
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="flex mt-80 navbar">
+            <div className="flex mt-80">
               <Image src={tilted1} alt="ticket" className="" />
               <Image src={tilted2} alt="ticket" className="" />
               <Image src={tilted3} alt="ticket" className="" />
