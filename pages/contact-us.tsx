@@ -7,7 +7,7 @@ function ContactUs() {
             <div className='flex top-container md:p-20 p-10 mt-8'>
                 <div className='left-container md:w-2/4'>
                     <h1 className='md:text-5xl text-3xl mb-3 md:text'>Miss collecting concert tickets? We did too.</h1>
-                    <p>We love music. It's that simple. We built m3mento because we wanted to give fans the best platform to do what they love most. NFT tickets allow fans to keep a digital souviner to recapure the experience, forever.</p>
+                    <p>We love music. It&apos;s that simple. We built m3mento because we wanted to give fans the best platform to do what they love most. NFT tickets allow fans to keep a digital souviner to recapure the experience, forever.</p>
                     <button>button</button>
                 </div>
             </div>
