@@ -10,22 +10,22 @@ function ContactUs() {
                     <p>We love music. It&apos;s that simple. We built m3mento because we want to give fans the best platform to do what they love most. NFT tickets allow fans to keep a digital souviner to recapure the experience.</p>
                 </div>
             </div>
-            <div className='flex md:pl-20 md:pr-20 md:pb-20 justify-around flex-col md:flex-row pl-10 pr-10 pb-10'>
-                <div className='md:w-4/12 mr-2 md:mb-0 mb-8'>
+            <div className='flex md:pl-20 md:pr-20 md:pb-20 justify-around flex-col md:flex-row pl-10 pr-10 pb-10 justify-around'>
+                <div className='lg:w-4/12 md:mb-0 mb-8'>
                     <h1 className='text-2xl mb-2'>Scams</h1>
                     <p>Tired of getting scammed when buying a ticket from a stranger? With NFT tickets, you can verify the ticket collection on the blockchain.</p>
                 </div>
-                <div className='md:w-4/12 md:mb-0 mb-8'>
+                <div className='lg:w-4/12 md:mb-0 mb-8'>
                     <h1 className='text-2xl mb-2'>Fees</h1>
                     <p>40% transaction fees? Not here. Our smart contracts are deployed on Polygon - that means really cheap transaction fees and eco-friendly.</p>
                 </div>
-                <div className='md:w-4/12 md:mb-0 mb-8'>
+                <div className='lg:w-4/12 md:mb-0 mb-8'>
                     <h1 className='text-2xl mb-2'>Collectables</h1>
                     <p>Digitial tickets are a big convenience. This convenience came at a cost. Once you checked into an event, that ticket would be lost in your inbox.</p>
                 </div>
             </div>
             <div className='flex justify-center'>
-                <button className="hover:bg-gradient-100 bg-gradient-250 font-bold py-2 px-4 rounded-full mr-14 mint-btn mb-3">
+                <button className="hover:bg-gradient-100 bg-gradient-250 font-bold py-2 px-4 rounded-full mr-14 mint-btn mb-12">
                     <a href='mailto:vanes@m3mento.xyz'>Contact Us</a>
                 </button>
             </div>
