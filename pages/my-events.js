@@ -41,8 +41,6 @@ const MyEventss = () => {
   const handleCheckIn = async (tokenId) => {
     if (!addressSignedIn) return;
     try {
-      console.log("ticket ID to be checked in: ", tokenId);
-      console.log("... checking in");
       let checkInTxn = await contractSigner.checkIn(tokenId);
       await checkInTxn.wait();
       setIsUserCheckedIn(true);
@@ -70,8 +68,6 @@ const MyEventss = () => {
 
               // decode base64 string, remove header
               let decodedObject = JSON.parse(atob(base64string));
-              console.log("decodedObject: ", decodedObject);
-              console.log(" IMAGE 🅿️ 🅿️ 🅿️ ", decodedObject.image);
               if (
                 decodedObject.image ===
                 "ipfs://QmbeECCAZnZdkdF2yVu23DQHsu4uc3WSnsMS1gnwP4j8L3"
@@ -109,29 +105,6 @@ const MyEventss = () => {
 
     checkAddress();
   }, [address]);
-
-  //   useEffect(() => {
-  //     if (!address) return;
-  //     console.log(address);
-
-  //     const openSeaQuery = `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${CONTRACT_ADDRESS}`;
-
-  //     console.log(" QUERY 🦭", openSeaQuery);
-  //     fetch(
-  //       `https://rinkeby-api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${CONTRACT_ADDRESS}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log(" 🥰🥰🥰🥰 TOTAL IS: ", data.assets.length);
-
-  //         console.log(" 🥰🥰🥰🥰 DATA: ", data);
-
-  //         if (data.assets?.length) {
-  //           setTickets(data.assets);
-  //         }
-  //       })
-  //       .catch((e) => console.log(e));
-  //   }, [address]);
 
   if (!addressSignedIn) {
     return (

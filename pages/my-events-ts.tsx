@@ -56,7 +56,6 @@ const MyEvents = ({ data }: MyEventsProps) => {
   const checkIfUserHoldsTicket = async (addy: string) => {
     try {
       let confirmOwnership = await contractProvider.getConfirmOwnership(addy);
-      console.log("confirmOwnership: ", confirmOwnership);
     } catch (e) {
       console.log(e);
     }
@@ -72,7 +71,6 @@ const MyEvents = ({ data }: MyEventsProps) => {
     if (!address) return;
     const checkAddress = async () => {
       setAddressSignedIn(address);
-      console.log("address", address);
     };
 
     checkAddress();
@@ -89,9 +87,6 @@ const MyEvents = ({ data }: MyEventsProps) => {
           name,
           token_id: tokenId,
         } = data?.assets[0];
-        console.log("image_original_url", imageOriginalUrl);
-        console.log("name", name);
-        console.log("tokenId", tokenId);
       });
   });
 

@@ -42,8 +42,6 @@ const Navbar = () => {
         if (!contractProvider) return;
         try {
             const ownerOfContract = await contractProvider.owner()
-            console.log('owner of contract:', ownerOfContract)
-            console.log('address', address)
             if (address === ownerOfContract) {
                 setIsAdmin(true)
             } else {
